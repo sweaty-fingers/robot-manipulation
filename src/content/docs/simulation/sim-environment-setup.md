@@ -43,7 +43,7 @@ plant.Finalize()
 - [ ] domain randomization 범위 (질량, 마찰 계수, 센서 노이즈) 정의
 
 :::tip
-Colab에서 바로 실행해보려면 [Colab 실습 가이드](/guides/colab-quickstart/)를 참고하세요.
+Colab에서 바로 실행해보려면 [Colab 실습 가이드](../../guides/colab-quickstart/)를 참고하세요.
 :::
 
 :::note[TODO]

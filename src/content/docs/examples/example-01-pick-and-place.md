@@ -36,8 +36,8 @@ for step in range(200):
 
 ## 다음 단계
 
-- 수집한 로그를 [재학습 파이프라인](/data-pipeline/retraining-loop/)에 연결해 모델을 반복 개선
-- 학습된 policy를 [sim-to-real 검증](/simulation/sim-to-real-validation/) 절차로 평가
+- 수집한 로그를 [재학습 파이프라인](../../data-pipeline/retraining-loop/)에 연결해 모델을 반복 개선
+- 학습된 policy를 [sim-to-real 검증](../../simulation/sim-to-real-validation/) 절차로 평가
 
 :::note[TODO]
 실제 로봇/그리퍼 모델로 교체, 성공률 등 결과 기록.

@@ -14,7 +14,7 @@ description: rerun.io 로그를 기반으로 실패 사례를 재수집하고 �
       ↓
 기존 데이터셋에 병합 (또는 curriculum 방식으로 별도 관리)
       ↓
-재학습 → [검증](/training/validation/) → 재배포
+재학습 → [검증](../../training/validation/) → 재배포
 ```
 
 ## 실패 사례 선별 기준
@@ -39,7 +39,7 @@ table = view.select().read_all()
 ## 데이터 버전 관리
 
 - 재학습에 사용한 `.rrd` 파일 목록(또는 날짜 범위)을 학습 config와 함께 기록
-- 데이터셋 버전과 모델 체크포인트를 1:1로 매핑해서 추적 ([모델 학습](/training/model-training/) 체크리스트 참고)
+- 데이터셋 버전과 모델 체크포인트를 1:1로 매핑해서 추적 ([모델 학습](../../training/model-training/) 체크리스트 참고)
 
 :::note[TODO]
 실제 변환 스크립트 경로, 재학습 주기(예: N회 배포마다 1회)를 여기에 기록.

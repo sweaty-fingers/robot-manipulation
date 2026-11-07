@@ -52,4 +52,4 @@ rerun logs/episode_001.rrd
 실제 사용 중인 rerun 버전, 로깅 스키마(entity path 네이밍 규칙)를 여기에 정리.
 :::
 
-다음: [재학습 데이터 파이프라인](/data-pipeline/retraining-loop/)
+다음: [재학습 데이터 파이프라인](../retraining-loop/)

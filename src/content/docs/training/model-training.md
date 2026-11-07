@@ -14,7 +14,7 @@ description: 실제 제어를 위한 manipulation 모델 학습 파이프라인.
       ↓
 체크포인트 저장 + 학습 로그(loss, metric) 기록
       ↓
-검증 ([모델 검증](/training/validation/)) → 시뮬레이션 재검증 → 실기 배포
+검증 ([모델 검증](../validation/)) → 시뮬레이션 재검증 → 실기 배포
 ```
 
 ## 학습 실행 템플릿
@@ -51,4 +51,4 @@ for epoch in range(num_epochs):
 실제 사용 모델 아키텍처, 하이퍼파라미터, config 파일 경로를 채워 넣기.
 :::
 
-Colab에서 바로 실행하는 예제는 [예제: Pick-and-Place 학습](/examples/example-01-pick-and-place/)에서 확인.
+Colab에서 바로 실행하는 예제는 [예제: Pick-and-Place 학습](../../examples/example-01-pick-and-place/)에서 확인.

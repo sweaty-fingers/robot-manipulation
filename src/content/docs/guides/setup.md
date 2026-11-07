@@ -28,4 +28,4 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-로컬에 GPU/시뮬레이터 환경이 없다면 [Colab 실습 가이드](/guides/colab-quickstart/)를 사용하세요.
+로컬에 GPU/시뮬레이터 환경이 없다면 [Colab 실습 가이드](../colab-quickstart/)를 사용하세요.
