@@ -1,0 +1,21 @@
+name: skeleton
+encoders:
+  proprio_output_dim: 64
+  fusion_output_dim: 128
+action_expert:
+  type: mlp
+  hidden_dims: [256, 256]
+env:
+  backend: drake
+  control_dt: 0.02
+  target: [0.5, 0.3, 0.2]
+  success_radius: 0.05
+  max_force: 5.0
+  max_episode_steps: 200
+train:
+  epochs: 50
+  batch_size: 64
+  lr: 0.001
+  seed: 0
+data_dir: data/episodes/skeleton
+checkpoint_dir: runs/skeleton

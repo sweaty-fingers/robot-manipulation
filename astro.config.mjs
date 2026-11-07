@@ -51,7 +51,7 @@ export default defineConfig({
 				{
 					label: '예제',
 					items: [
-						{ label: 'Pick-and-Place 데모', slug: 'examples/example-01-pick-and-place' },
+						{ label: 'Point-Mass Reach (Drake)', slug: 'examples/example-01-reach' },
 					],
 				},
 			],

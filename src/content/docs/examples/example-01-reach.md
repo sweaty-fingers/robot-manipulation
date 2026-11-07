@@ -1,0 +1,54 @@
+---
+title: "예제 1: Point-Mass Reach (Drake)"
+description: Drake 기반 point-mass reach task로 env → rerun 로깅 → 학습 → 평가 전체 파이프라인을 검증하는 예제.
+---
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sweaty-fingers/robot-manipulation/blob/main/notebooks/example-01-reach.ipynb)
+
+이 예제는 실제 `robot_manipulation` 패키지로 다음 흐름 전체가 end-to-end로 동작하는 것을 보여줍니다 (Phase 0 "walking skeleton" — 사전학습 encoder나 실제 로봇 모델 없이, 파이프라인 자체가 맞는지부터 검증).
+
+1. `DrakeEnv` — URDF 없이 Drake API로 직접 만든 3-DOF point-mass reach task
+2. 스크립트 PD 컨트롤러로 demo rollout 수집 + `rerun.io`로 시각화 로깅
+3. `MLPActionExpert` + `ProprioEncoder`로 behavior cloning 학습
+4. `DrakeEnv`에서 다시 평가해 success rate 확인
+
+## 설치
+
+```bash
+pip install "robot-manipulation @ git+https://github.com/sweaty-fingers/robot-manipulation.git"
+```
+
+## 핵심 코드
+
+```python
+from robot_manipulation.envs.drake_env import DrakeEnv
+
+env = DrakeEnv()
+obs = env.reset(seed=0)
+for _ in range(50):
+    action = ...  # policy or scripted controller
+    obs, reward, done, info = env.step(action)
+    if done:
+        break
+```
+
+실행 가능한 전체 스크립트는 레포의 `scripts/collect_demos.py`, `scripts/train.py`,
+`scripts/evaluate.py`를 참고하세요:
+
+```bash
+python scripts/collect_demos.py --config configs/experiments/00_skeleton.yaml --n-episodes 50
+python scripts/train.py --config configs/experiments/00_skeleton.yaml
+python scripts/evaluate.py --config configs/experiments/00_skeleton.yaml
+```
+
+전체 실행 가능한 노트북은 위 Colab 배지로 열어서 셀 순서대로 실행하세요.
+
+## 다음 단계
+
+- 사전학습 vision/audio/tactile encoder를 `ObservationEncoder`에 추가 (Phase 1+)
+- 수집한 로그를 [재학습 파이프라인](../../data-pipeline/retraining-loop/)에 연결
+- MuJoCo를 두 번째 `RobotEnv` 백엔드로 추가해 추상화가 실제로 성립하는지 검증
+
+:::note[TODO]
+실제 로봇 모델(URDF/SDF)로 교체, 성공률 등 결과 기록.
+:::

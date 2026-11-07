@@ -28,6 +28,21 @@ notebooks/           Colab에서 여는 실제 .ipynb 파일
 
 새 페이지 작성 규칙은 [AGENTS.md](./AGENTS.md)를 참고하세요.
 
+## 코드 프레임워크 (`robot_manipulation/`)
+
+사전학습 인코더 + 학습 가능한 action-expert + 교체 가능한 시뮬레이터 백엔드(Drake 우선)
++ rerun.io 데이터 파이프라인으로 구성된 Python 프레임워크입니다.
+
+```bash
+uv venv .venv && uv pip install --python .venv/bin/python -e ".[dev]"
+python scripts/collect_demos.py --config configs/experiments/00_skeleton.yaml --n-episodes 50
+python scripts/train.py --config configs/experiments/00_skeleton.yaml
+python scripts/evaluate.py --config configs/experiments/00_skeleton.yaml
+pytest tests/
+```
+
+구조와 설계 이유는 [AGENTS.md](./AGENTS.md)를 참고하세요.
+
 ## 배포
 
 `main` 브랜치에 push하면 `.github/workflows/deploy.yml`이 자동으로 빌드 후

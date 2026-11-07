@@ -1,0 +1,22 @@
+[project]
+name = "robot-manipulation"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2",
+    "numpy",
+    "omegaconf>=2.3",
+    "rerun-sdk>=0.20",
+    "drake>=1.30",
+]
+
+[project.optional-dependencies]
+mujoco = ["mujoco", "dm_control"]
+dev = ["pytest", "ruff"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["robot_manipulation"]
