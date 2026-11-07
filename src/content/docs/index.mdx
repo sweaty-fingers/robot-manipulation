@@ -1,0 +1,36 @@
+---
+title: Robot Manipulation Lab
+description: Robot manipulation, 모델 학습/검증, rerun.io 기반 재학습 데이터 파이프라인을 정리하는 개인 학습 노트.
+template: splash
+hero:
+  tagline: Robot manipulation 개념부터 실제 제어 모델 학습·검증, rerun.io 기반 재학습 데이터 파이프라인까지 — 코드와 실습(Colab) 예제를 포함한 학습 노트.
+  actions:
+    - text: 개념부터 시작하기
+      link: /concepts/manipulation-basics/
+      icon: right-arrow
+    - text: 실습 가이드 보기
+      link: /guides/colab-quickstart/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="개념" icon="open-book">
+		Robot manipulation의 핵심 개념 — 좌표계, 역기구학, 파지(grasping), 지각-제어 루프.
+		[바로 가기](/concepts/manipulation-basics/)
+	</Card>
+	<Card title="시뮬레이션" icon="setting">
+		Drake / MuJoCo 기반 시뮬레이터 환경 구축, sim-to-real 검증 전략.
+		[바로 가기](/simulation/drake-mujoco-overview/)
+	</Card>
+	<Card title="모델 학습 & 검증" icon="rocket">
+		실제 제어를 위한 모델 학습 파이프라인과 검증 지표.
+		[바로 가기](/training/model-training/)
+	</Card>
+	<Card title="데이터 파이프라인" icon="puzzle">
+		rerun.io 기반 로그 수집 → 재학습 루프 설계.
+		[바로 가기](/data-pipeline/rerun-overview/)
+	</Card>
+</CardGrid>
