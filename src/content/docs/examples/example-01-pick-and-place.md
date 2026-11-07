@@ -3,9 +3,9 @@ title: "예제 1: Pick-and-Place 학습 데모"
 description: MuJoCo 환경에서 간단한 pick-and-place policy를 학습하는 end-to-end 예제.
 ---
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sweaty-fingers/vtla/blob/main/notebooks/example-01-pick-and-place.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sweaty-fingers/robot-manipulation/blob/main/notebooks/example-01-pick-and-place.ipynb)
 
-> 레포/계정 이름이 바뀌면 위 배지의 `sweaty-fingers/vtla` 부분을 실제 GitHub `<user>/<repo>`로 맞춰주세요.
+> 레포/계정 이름이 바뀌면 위 배지의 `sweaty-fingers/robot-manipulation` 부분을 실제 GitHub `<user>/<repo>`로 맞춰주세요.
 
 이 예제는 다음 흐름을 최소 코드로 보여줍니다.
 

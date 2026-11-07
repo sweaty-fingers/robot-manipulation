@@ -2,15 +2,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// GitHub Pages serves this repo at https://sweaty-fingers.github.io/vtla/
+// GitHub Pages serves this repo at https://sweaty-fingers.github.io/robot-manipulation/
 // Update `site`/`base` here if the GitHub user or repo name changes.
 export default defineConfig({
 	site: 'https://sweaty-fingers.github.io',
-	base: '/vtla',
+	base: '/robot-manipulation',
 	integrations: [
 		starlight({
 			title: 'Robot Manipulation Lab',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/sweaty-fingers/vtla' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/sweaty-fingers/robot-manipulation' }],
 			sidebar: [
 				{
 					label: '개념 (Concepts)',
