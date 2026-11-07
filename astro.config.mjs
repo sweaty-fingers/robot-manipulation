@@ -11,6 +11,21 @@ export default defineConfig({
 		starlight({
 			title: 'Robot Manipulation Lab',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/sweaty-fingers/robot-manipulation' }],
+			customCss: ['./src/styles/custom.css'],
+			components: {
+				Header: './src/components/SectionTabsHeader.astro',
+			},
+			head: [
+				{ tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
+				{ tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'stylesheet',
+						href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+					},
+				},
+			],
 			sidebar: [
 				{
 					label: '개념 (Concepts)',

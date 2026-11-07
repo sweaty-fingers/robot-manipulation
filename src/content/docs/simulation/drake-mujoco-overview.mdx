@@ -3,6 +3,8 @@ title: Drake / MuJoCo 개요
 description: 시뮬레이터 선택 기준과 Drake, MuJoCo의 차이.
 ---
 
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
 Manipulation 모델을 실기(real robot)에 바로 적용하기 전, 시뮬레이터에서 학습·검증하는 단계가 데이터 수집 비용과 안전성 측면에서 필수적입니다.
 
 ## Drake vs MuJoCo
@@ -16,6 +18,51 @@ Manipulation 모델을 실기(real robot)에 바로 적용하기 전, 시뮬레�
 | 주 사용처 | manipulation planning, 제어기 설계/검증 | 대규모 RL 학습, 병렬 롤아웃 |
 
 **선택 기준 메모**: 정밀한 접촉/물리 검증이나 최적화 기반 planning이 중심이면 Drake, 대량 롤아웃으로 policy를 학습(RL/IL)하는 게 중심이면 MuJoCo(+MJX)가 유리. 두 시뮬레이터를 역할 분리해서 같이 쓰는 것도 흔한 패턴(예: MuJoCo로 policy 학습 → Drake로 정밀 검증).
+
+## 빠른 시작
+
+`robot_manipulation`의 `RobotEnv` 인터페이스 뒤에 백엔드가 숨어 있어서, 둘 다 같은
+모양의 코드로 다뤄집니다.
+
+<Tabs>
+	<TabItem label="Drake (구현됨)">
+		```bash
+		uv pip install --python .venv/bin/python drake
+		```
+
+		```python
+		from robot_manipulation.envs.drake_env import DrakeEnv
+
+		env = DrakeEnv()
+		obs = env.reset(seed=0)
+		obs, reward, done, info = env.step(action)
+		```
+
+		현재 Phase 0의 유일한 백엔드. URDF 없이 Drake API로 직접 만든 point-mass
+		reach task로 파이프라인을 검증했습니다 — 자세한 내용은
+		[환경 구축](../sim-environment-setup/) 참고.
+	</TabItem>
+	<TabItem label="MuJoCo (계획)">
+		```bash
+		uv pip install --python .venv/bin/python -e ".[mujoco]"
+		```
+
+		```python
+		# 아직 구현되지 않음 — RobotEnv 인터페이스를 동일하게 구현하는
+		# MuJoCoEnv를 robot_manipulation/envs/mujoco_env.py에 추가할 예정
+		from robot_manipulation.envs.mujoco_env import MuJoCoEnv  # TODO
+		```
+
+		`pyproject.toml`의 `mujoco` extras에 의존성만 선언돼 있고, 실제 `MuJoCoEnv`는
+		아직 없습니다. 추상화(`RobotEnv`)가 실제로 성립하는지 검증하는 단계에서 추가합니다.
+	</TabItem>
+</Tabs>
+
+<Aside type="note" title="왜 Drake를 먼저 구현했나">
+	action-expert/VLA 연구 생태계는 MuJoCo 쪽이 훨씬 크지만(로봇/그리퍼 모델, 벤치마크,
+	데이터셋 재사용 용이), 개인 학습 목적상 Drake를 먼저 선택했습니다. `RobotEnv`
+	추상화 덕분에 이 선택이 영구적 lock-in은 아닙니다.
+</Aside>
 
 ## 이 프로젝트에서의 역할
 

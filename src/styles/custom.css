@@ -1,0 +1,38 @@
+/* Mintlify-mood theming: confident single accent, warm-neutral surfaces,
+   Inter type, softer rounded cards. Accent is a teal/cyan distinct from any
+   vendor's brand color — chosen for this project, not copied from one. */
+
+@layer starlight.base {
+	:root {
+		--sl-hue-accent: 187;
+		--sl-color-accent-low: hsl(var(--sl-hue-accent), 44%, 20%);
+		--sl-color-accent: hsl(var(--sl-hue-accent), 85%, 55%);
+		--sl-color-accent-high: hsl(var(--sl-hue-accent), 90%, 85%);
+
+		--sl-font: 'Inter', var(--sl-font-system);
+	}
+
+	:root[data-theme='light'] {
+		--sl-color-accent-low: hsl(var(--sl-hue-accent), 70%, 92%);
+		--sl-color-accent: hsl(var(--sl-hue-accent), 75%, 38%);
+		--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 24%);
+		--sl-color-text-accent: var(--sl-color-accent);
+		--sl-color-bg-accent: var(--sl-color-accent);
+	}
+}
+
+@layer starlight.utils {
+	.card,
+	starlight-tabs .tab-panel,
+	[class^='sl-markdown-content'] .starlight-aside {
+		border-radius: 0.75rem;
+	}
+
+	a.card {
+		transition: border-color 0.15s ease, transform 0.1s ease;
+	}
+	a.card:hover {
+		border-color: var(--sl-color-accent);
+		transform: translateY(-1px);
+	}
+}

@@ -3,6 +3,8 @@ title: "예제 1: Point-Mass Reach (Drake)"
 description: Drake 기반 point-mass reach task로 env → rerun 로깅 → 학습 → 평가 전체 파이프라인을 검증하는 예제.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sweaty-fingers/robot-manipulation/blob/main/notebooks/example-01-reach.ipynb)
 
 이 예제는 실제 `robot_manipulation` 패키지로 다음 흐름 전체가 end-to-end로 동작하는 것을 보여줍니다 (Phase 0 "walking skeleton" — 사전학습 encoder나 실제 로봇 모델 없이, 파이프라인 자체가 맞는지부터 검증).
@@ -12,11 +14,33 @@ description: Drake 기반 point-mass reach task로 env → rerun 로깅 → 학�
 3. `MLPActionExpert` + `ProprioEncoder`로 behavior cloning 학습
 4. `DrakeEnv`에서 다시 평가해 success rate 확인
 
-## 설치
+## 실행
 
-```bash
-pip install "robot-manipulation @ git+https://github.com/sweaty-fingers/robot-manipulation.git"
-```
+<Steps>
+1. 설치
+
+   ```bash
+   pip install "robot-manipulation @ git+https://github.com/sweaty-fingers/robot-manipulation.git"
+   ```
+
+2. Demo 수집 (scripted PD 컨트롤러 + rerun.io 로깅)
+
+   ```bash
+   python scripts/collect_demos.py --config configs/experiments/00_skeleton.yaml --n-episodes 50
+   ```
+
+3. 학습 (behavior cloning)
+
+   ```bash
+   python scripts/train.py --config configs/experiments/00_skeleton.yaml
+   ```
+
+4. 평가 (`DrakeEnv`에서 success rate 확인)
+
+   ```bash
+   python scripts/evaluate.py --config configs/experiments/00_skeleton.yaml
+   ```
+</Steps>
 
 ## 핵심 코드
 
@@ -30,15 +54,6 @@ for _ in range(50):
     obs, reward, done, info = env.step(action)
     if done:
         break
-```
-
-실행 가능한 전체 스크립트는 레포의 `scripts/collect_demos.py`, `scripts/train.py`,
-`scripts/evaluate.py`를 참고하세요:
-
-```bash
-python scripts/collect_demos.py --config configs/experiments/00_skeleton.yaml --n-episodes 50
-python scripts/train.py --config configs/experiments/00_skeleton.yaml
-python scripts/evaluate.py --config configs/experiments/00_skeleton.yaml
 ```
 
 전체 실행 가능한 노트북은 위 Colab 배지로 열어서 셀 순서대로 실행하세요.

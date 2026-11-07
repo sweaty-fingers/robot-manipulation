@@ -14,7 +14,25 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 시작하기
+
+<Tabs>
+	<TabItem label="로컬">
+		```bash
+		git clone https://github.com/sweaty-fingers/robot-manipulation.git
+		cd robot-manipulation
+		uv venv .venv && uv pip install --python .venv/bin/python -e ".[dev]"
+		python scripts/collect_demos.py --config configs/experiments/00_skeleton.yaml --n-episodes 50
+		python scripts/train.py --config configs/experiments/00_skeleton.yaml
+		```
+	</TabItem>
+	<TabItem label="Colab (설치 불필요)">
+		[Point-Mass Reach 예제](examples/example-01-reach/)의 Colab 배지를 눌러 브라우저에서
+		바로 실행하세요 — 로컬 환경 설정이 전혀 필요 없습니다.
+	</TabItem>
+</Tabs>
 
 <CardGrid stagger>
 	<Card title="개념" icon="open-book">
