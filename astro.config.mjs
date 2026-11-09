@@ -14,6 +14,7 @@ export default defineConfig({
 			customCss: ['./src/styles/custom.css'],
 			components: {
 				Header: './src/components/SectionTabsHeader.astro',
+				Sidebar: './src/components/ScopedSidebar.astro',
 			},
 			head: [
 				{ tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },

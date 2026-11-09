@@ -36,3 +36,36 @@
 		transform: translateY(-1px);
 	}
 }
+
+/* --- Layout fixes (unlayered: wins over Starlight's @layer rules outright,
+   no specificity fights needed) --- */
+
+/* Starlight pins the content column to the right edge of its available
+   space when a right-hand TOC is present (--sl-content-margin-inline: auto 0
+   on .main-pane), which on wide viewports leaves a big empty gap on the left
+   and makes the narrow (45rem) column look skewed right. Center it instead,
+   and widen it on large screens. */
+@media (min-width: 72rem) {
+	:root {
+		--sl-content-width: 54rem;
+	}
+	.sl-container {
+		margin-inline: auto;
+	}
+}
+
+@media (min-width: 100rem) {
+	:root {
+		--sl-content-width: 62rem;
+	}
+}
+
+/* SectionTabsHeader adds a second row below Starlight's default header, but
+   the header's height is a fixed CSS variable — bump it (only where the tab
+   row is actually visible, >=50rem) so content/sidebar get pushed down to
+   clear it instead of being overlapped by it. */
+@media (min-width: 50rem) {
+	:root {
+		--sl-nav-height: 6.5rem;
+	}
+}
