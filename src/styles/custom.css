@@ -1,21 +1,21 @@
-/* Mintlify-mood theming: confident single accent, warm-neutral surfaces,
-   Inter type, softer rounded cards. Accent is a teal/cyan distinct from any
-   vendor's brand color — chosen for this project, not copied from one. */
+/* Mintlify-mood theming: warm clay/terracotta accent (same warm family as
+   docs sites like Anthropic's, but a distinct hue/saturation recipe — not
+   their exact values), Inter type, softer rounded cards. */
 
 @layer starlight.base {
 	:root {
-		--sl-hue-accent: 187;
-		--sl-color-accent-low: hsl(var(--sl-hue-accent), 44%, 20%);
-		--sl-color-accent: hsl(var(--sl-hue-accent), 85%, 55%);
-		--sl-color-accent-high: hsl(var(--sl-hue-accent), 90%, 85%);
+		--sl-hue-accent: 20;
+		--sl-color-accent-low: hsl(var(--sl-hue-accent), 40%, 22%);
+		--sl-color-accent: hsl(var(--sl-hue-accent), 70%, 62%);
+		--sl-color-accent-high: hsl(var(--sl-hue-accent), 75%, 85%);
 
 		--sl-font: 'Inter', var(--sl-font-system);
 	}
 
 	:root[data-theme='light'] {
-		--sl-color-accent-low: hsl(var(--sl-hue-accent), 70%, 92%);
-		--sl-color-accent: hsl(var(--sl-hue-accent), 75%, 38%);
-		--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 24%);
+		--sl-color-accent-low: hsl(var(--sl-hue-accent), 55%, 93%);
+		--sl-color-accent: hsl(var(--sl-hue-accent), 65%, 40%);
+		--sl-color-accent-high: hsl(var(--sl-hue-accent), 60%, 26%);
 		--sl-color-text-accent: var(--sl-color-accent);
 		--sl-color-bg-accent: var(--sl-color-accent);
 	}
@@ -81,7 +81,12 @@
 
 /* --- Hover/focus "shading" to match Mintlify's docs feel: a soft rounded
    background chip behind nav items on hover, not just a text-color change,
-   plus a gentle lift/shadow on interactive cards. --- */
+   plus a gentle lift/shadow on interactive cards.
+
+   Note: --sl-color-gray-6 equals --sl-color-bg-sidebar/--sl-color-bg-nav in
+   dark mode, so a gray-6 hover background was invisible (same color as what
+   was behind it) — use gray-5, which always differs from the surfaces it
+   sits on in both themes. --- */
 
 .sidebar-pane a {
 	border-radius: 0.5rem;
@@ -89,5 +94,5 @@
 }
 
 .sidebar-pane a:not([aria-current='page']):hover {
-	background-color: var(--sl-color-gray-6);
+	background-color: var(--sl-color-gray-5);
 }
