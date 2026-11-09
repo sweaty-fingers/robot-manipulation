@@ -29,11 +29,12 @@
 	}
 
 	a.card {
-		transition: border-color 0.15s ease, transform 0.1s ease;
+		transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
 	}
 	a.card:hover {
 		border-color: var(--sl-color-accent);
 		transform: translateY(-1px);
+		box-shadow: var(--sl-shadow-md);
 	}
 }
 
@@ -60,12 +61,33 @@
 	}
 }
 
-/* SectionTabsHeader adds a second row below Starlight's default header, but
-   the header's height is a fixed CSS variable — bump it (only where the tab
-   row is actually visible, >=50rem) so content/sidebar get pushed down to
-   clear it instead of being overlapped by it. */
+/* SectionTabsHeader adds a second row below Starlight's default header.
+   --sl-nav-height-original tracks Starlight's own (unmodified) nav height so
+   the wrapper around <Default> in SectionTabsHeader stays correctly sized;
+   --section-tabs-height is the extra row's height. --sl-nav-height (consumed
+   by the sidebar, main content padding, and scroll-padding) is their sum, so
+   everything clears the taller header instead of being overlapped by it. */
+:root {
+	--sl-nav-height-original: 3.5rem;
+	--section-tabs-height: 2.5rem;
+}
+
 @media (min-width: 50rem) {
 	:root {
-		--sl-nav-height: 6.5rem;
+		--sl-nav-height-original: 4rem;
+		--sl-nav-height: calc(var(--sl-nav-height-original) + var(--section-tabs-height));
 	}
+}
+
+/* --- Hover/focus "shading" to match Mintlify's docs feel: a soft rounded
+   background chip behind nav items on hover, not just a text-color change,
+   plus a gentle lift/shadow on interactive cards. --- */
+
+.sidebar-pane a {
+	border-radius: 0.5rem;
+	transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.sidebar-pane a:not([aria-current='page']):hover {
+	background-color: var(--sl-color-gray-6);
 }
