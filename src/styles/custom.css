@@ -19,6 +19,19 @@
 	--sl-color-accent: hsl(var(--sl-hue-accent), 70%, 62%);
 	--sl-color-accent-high: hsl(var(--sl-hue-accent), 75%, 85%);
 	--sl-font: 'Inter', var(--sl-font-system);
+
+	/* Dark mode: Starlight's default gray scale is hue 224 (cool blue-gray),
+	   which reads as "dark slate" rather than black and clashes with the
+	   warm accent. Replace it with a warm-neutral, near-black scale at the
+	   same hue as the accent, at low saturation. */
+	--sl-color-white: hsl(var(--sl-hue-accent), 10%, 97%);
+	--sl-color-gray-1: hsl(var(--sl-hue-accent), 6%, 91%);
+	--sl-color-gray-2: hsl(var(--sl-hue-accent), 4%, 76%);
+	--sl-color-gray-3: hsl(var(--sl-hue-accent), 4%, 58%);
+	--sl-color-gray-4: hsl(var(--sl-hue-accent), 4%, 38%);
+	--sl-color-gray-5: hsl(var(--sl-hue-accent), 4%, 24%);
+	--sl-color-gray-6: hsl(var(--sl-hue-accent), 5%, 14%);
+	--sl-color-black: hsl(var(--sl-hue-accent), 6%, 6%);
 }
 
 :root[data-theme='light'] {
