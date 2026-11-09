@@ -1,45 +1,35 @@
 /* Mintlify-mood theming: warm clay/terracotta accent (same warm family as
    docs sites like Anthropic's, but a distinct hue/saturation recipe — not
-   their exact values), Inter type, softer rounded cards. */
+   their exact values), Inter type, softer rounded cards.
 
-@layer starlight.base {
-	:root {
-		--sl-hue-accent: 20;
-		--sl-color-accent-low: hsl(var(--sl-hue-accent), 40%, 22%);
-		--sl-color-accent: hsl(var(--sl-hue-accent), 70%, 62%);
-		--sl-color-accent-high: hsl(var(--sl-hue-accent), 75%, 85%);
+   IMPORTANT: color-token overrides below are deliberately UNLAYERED (not
+   wrapped in @layer), and must stay that way. Starlight's own color
+   defaults live in `@layer starlight.base`. Astro imports this file
+   (virtual:starlight/user-css) *before* Starlight's props.css, so if this
+   file's overrides were in the *same* named layer, Starlight's later,
+   same-specificity `:root` declaration would win within that layer and
+   silently revert the colors back to its blue default — which is exactly
+   what happened the first time this was tried. Unlayered CSS always beats
+   layered CSS regardless of source order or specificity, so leaving these
+   unlayered is what makes the override actually stick. */
 
-		--sl-font: 'Inter', var(--sl-font-system);
-	}
-
-	:root[data-theme='light'] {
-		--sl-color-accent-low: hsl(var(--sl-hue-accent), 55%, 93%);
-		--sl-color-accent: hsl(var(--sl-hue-accent), 65%, 40%);
-		--sl-color-accent-high: hsl(var(--sl-hue-accent), 60%, 26%);
-		--sl-color-text-accent: var(--sl-color-accent);
-		--sl-color-bg-accent: var(--sl-color-accent);
-	}
+:root {
+	--sl-hue-accent: 20;
+	--sl-color-accent-low: hsl(var(--sl-hue-accent), 40%, 22%);
+	--sl-color-accent: hsl(var(--sl-hue-accent), 70%, 62%);
+	--sl-color-accent-high: hsl(var(--sl-hue-accent), 75%, 85%);
+	--sl-font: 'Inter', var(--sl-font-system);
 }
 
-@layer starlight.utils {
-	.card,
-	starlight-tabs .tab-panel,
-	[class^='sl-markdown-content'] .starlight-aside {
-		border-radius: 0.75rem;
-	}
-
-	a.card {
-		transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
-	}
-	a.card:hover {
-		border-color: var(--sl-color-accent);
-		transform: translateY(-1px);
-		box-shadow: var(--sl-shadow-md);
-	}
+:root[data-theme='light'] {
+	--sl-color-accent-low: hsl(var(--sl-hue-accent), 55%, 93%);
+	--sl-color-accent: hsl(var(--sl-hue-accent), 65%, 40%);
+	--sl-color-accent-high: hsl(var(--sl-hue-accent), 60%, 26%);
+	--sl-color-text-accent: var(--sl-color-accent);
+	--sl-color-bg-accent: var(--sl-color-accent);
 }
 
-/* --- Layout fixes (unlayered: wins over Starlight's @layer rules outright,
-   no specificity fights needed) --- */
+/* --- Layout fixes --- */
 
 /* Starlight pins the content column to the right edge of its available
    space when a right-hand TOC is present (--sl-content-margin-inline: auto 0
@@ -79,14 +69,11 @@
 	}
 }
 
-/* --- Hover/focus "shading" to match Mintlify's docs feel: a soft rounded
-   background chip behind nav items on hover, not just a text-color change,
-   plus a gentle lift/shadow on interactive cards.
+/* --- Hover/current-page "shading": soft rounded chips, not solid blocks ---
 
    Note: --sl-color-gray-6 equals --sl-color-bg-sidebar/--sl-color-bg-nav in
    dark mode, so a gray-6 hover background was invisible (same color as what
-   was behind it) — use gray-5, which always differs from the surfaces it
-   sits on in both themes. --- */
+   was behind it) — gray-5 always differs from the surfaces it sits on. */
 
 .sidebar-pane a {
 	border-radius: 0.5rem;
@@ -95,4 +82,30 @@
 
 .sidebar-pane a:not([aria-current='page']):hover {
 	background-color: var(--sl-color-gray-5);
+}
+
+/* Starlight's default "current page" style is a solid accent-color block
+   with inverted text, which read as a heavy, dark slab. Use a translucent
+   accent tint instead, with text in the accent color itself. */
+.sidebar-pane [aria-current='page'] {
+	background-color: color-mix(in srgb, var(--sl-color-accent) 16%, transparent);
+	color: var(--sl-color-accent);
+}
+
+/* --- Cards: shadow lift on hover --- */
+
+.card,
+starlight-tabs .tab-panel,
+[class^='sl-markdown-content'] .starlight-aside {
+	border-radius: 0.75rem;
+}
+
+a.card {
+	transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+a.card:hover {
+	border-color: var(--sl-color-accent);
+	transform: translateY(-1px);
+	box-shadow: var(--sl-shadow-md);
 }

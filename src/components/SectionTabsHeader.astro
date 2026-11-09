@@ -83,7 +83,7 @@ const { pathname } = Astro.url;
 	}
 
 	.section-tabs a[aria-current='page'] {
-		color: var(--sl-color-text-invert);
-		background-color: var(--sl-color-accent);
+		color: var(--sl-color-accent);
+		background-color: color-mix(in srgb, var(--sl-color-accent) 16%, transparent);
 	}
 </style>
