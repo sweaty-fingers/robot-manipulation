@@ -63,7 +63,20 @@ const { pathname } = Astro.url;
 		display: flex;
 		gap: 0.25rem;
 		list-style: none;
-		max-width: 1200px;
+	}
+
+	/* Match the sidebar/content/TOC group's max-width treatment (see
+	   custom.css's --sl-edge-offset): inset the header's content and the
+	   tab row by the same amount so they stay grouped with the content
+	   below instead of spreading to the raw viewport edges. The bars'
+	   own backgrounds stay full-bleed — only the content inside insets. */
+	@media (min-width: 72rem) {
+		.original-header-row {
+			padding-inline: var(--sl-edge-offset, 0px);
+		}
+		.section-tabs ul {
+			padding-inline: calc(var(--sl-edge-offset, 0px) + var(--sl-nav-pad-x));
+		}
 	}
 
 	.section-tabs a {
