@@ -104,6 +104,40 @@
 	[data-has-sidebar][data-has-toc] .main-pane {
 		width: calc(100% - var(--sl-sidebar-width));
 	}
+
+	/* The above keeps content centered WITHIN the space between the two
+	   sidebars, but the sidebars themselves (.sidebar-pane / .right-sidebar)
+	   are `position: fixed` pinned to the actual viewport edges (left: 0,
+	   and effectively the right edge). So on very wide screens the sidebars
+	   stay glued to the edges while content stays capped at --sl-content-
+	   width, and the gap between sidebar and content keeps growing.
+
+	   Instead, cap the whole 3-column group (sidebar + content + toc) at
+	   --sl-page-max-width and center *that*: --sl-edge-offset is the empty
+	   margin outside the group once the viewport exceeds it, and both
+	   sidebars are inset by that same amount, so they track the content
+	   instead of the viewport edges. */
+	:root {
+		/* sidebar(18.75rem) + toc(18.75rem) + content-panel padding(2x1.5rem)
+		   + the ~54rem target content width, with some room to spare. */
+		--sl-page-max-width: 112rem;
+		--sl-edge-offset: max(0px, (100vw - var(--sl-page-max-width)) / 2);
+	}
+
+	.sidebar-pane {
+		inset-inline-start: var(--sl-edge-offset);
+	}
+
+	.right-sidebar {
+		inset-inline-start: auto;
+		inset-inline-end: var(--sl-edge-offset);
+		width: var(--sl-sidebar-width);
+	}
+
+	.main-frame {
+		padding-inline-start: calc(var(--sl-edge-offset) + var(--sl-sidebar-width));
+		padding-inline-end: calc(var(--sl-edge-offset) + var(--sl-sidebar-width));
+	}
 }
 
 @media (min-width: 100rem) {
