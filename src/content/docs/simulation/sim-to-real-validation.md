@@ -23,6 +23,6 @@ description: 시뮬레이션에서 학습한 policy를 실기에 배포하기 �
 
 실패한 롤아웃은 반드시 rerun.io 로그로 저장하고, [재학습 루프](../../data-pipeline/retraining-loop/) 문서에서 다루는 "실패 사례 재수집" 파이프라인으로 연결.
 
-:::note[TODO]
+:::caution[TODO]
 실제 검증 결과(성공률 표, 실패 사례 스크린샷/rerun 링크)를 이 페이지에 채워 넣기.
 :::

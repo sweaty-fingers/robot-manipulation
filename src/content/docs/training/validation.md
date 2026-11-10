@@ -30,6 +30,6 @@ python evaluate.py \
 
 `--log-rerun true`로 실행하면 각 episode의 관측/액션/성공여부가 rerun.io에 기록되어, [데이터 파이프라인](../../data-pipeline/retraining-loop/)의 실패 사례 재수집 단계로 바로 연결됩니다.
 
-:::note[TODO]
+:::caution[TODO]
 실제 평가 스크립트 경로와 최근 실험 결과 요약을 여기에 기록.
 :::

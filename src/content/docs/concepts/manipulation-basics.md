@@ -36,6 +36,6 @@ description: 좌표계, 기구학, 파지(grasping), 지각-제어 루프 등 ma
 
 이 루프의 각 단계가 [시뮬레이션](../../simulation/drake-mujoco-overview/)에서는 어떻게 구성되고, [데이터 파이프라인](../../data-pipeline/rerun-overview/)에서는 어떻게 기록되는지 연결해서 정리.
 
-:::note[TODO]
+:::caution[TODO]
 여기에 실제로 다루는 로봇/그리퍼 사양, 많이 참고하는 논문·레포 링크를 채워 넣기.
 :::

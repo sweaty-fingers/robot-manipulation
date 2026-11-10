@@ -46,6 +46,6 @@ plant.Finalize()
 Colab에서 바로 실행해보려면 [Colab 실습 가이드](../../guides/colab-quickstart/)를 참고하세요.
 :::
 
-:::note[TODO]
+:::caution[TODO]
 실제 사용 중인 로봇 모델 파일 경로와 설치 스크립트를 여기에 연결.
 :::

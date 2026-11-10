@@ -30,6 +30,6 @@ https://colab.research.google.com/github/<github-user>/<repo>/blob/main/notebook
 - Drake: `pip install drake` 또는 Drake 공식 Colab 설치 스크립트 사용 — 버전에 따라 설치 시간이 길 수 있음
 - GPU 런타임이 필요하면 Colab 메뉴에서 **런타임 > 런타임 유형 변경 > GPU** 선택
 
-:::note[TODO]
+:::caution[TODO]
 실제 사용하는 notebook 템플릿(의존성 설치 셀, 공통 유틸)을 `notebooks/_template.ipynb`로 만들어 재사용.
 :::

@@ -24,6 +24,6 @@ description: Manipulation 정책에서 사용하는 지각 입력과 제어 방�
 - [ ] 제어 주기(control frequency)와 센서 주기가 일치하는지
 - [ ] 좌표계/단위(미터·라디안 등) 일관성
 
-:::note[TODO]
+:::caution[TODO]
 실제 사용 중인 observation/action 스펙을 여기에 코드 스니펫으로 명시.
 :::
