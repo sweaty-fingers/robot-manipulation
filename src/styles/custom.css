@@ -40,6 +40,30 @@
 	--sl-color-accent-high: hsl(var(--sl-hue-accent), 60%, 26%);
 	--sl-color-text-accent: var(--sl-color-accent);
 	--sl-color-bg-accent: var(--sl-color-accent);
+
+	/* Light mode needs its OWN white/gray-1..7/black scale — these aren't
+	   inherited-and-adjusted from the dark :root block above, they're
+	   separate tokens Starlight expects every theme to redefine in full
+	   (e.g. --sl-color-black is "page background", which must be light
+	   here but is near-black in the dark block above). Omitting them left
+	   light mode silently using the dark block's near-black background /
+	   light-gray text — i.e. dark mode's palette with light mode's
+	   structure, which is what "completely broken" was.
+
+	   --sl-color-black (the page background) gets a warm cream/parchment
+	   tint here instead of plain white — a deliberately paper-like warmth,
+	   not a copy of any specific site's exact background (manipulation.
+	   csail.mit.edu's own background, checked directly, is plain white;
+	   its warmth comes from a maroon accent color, not the page background). */
+	--sl-color-white: hsl(var(--sl-hue-accent), 8%, 12%);
+	--sl-color-gray-1: hsl(var(--sl-hue-accent), 8%, 18%);
+	--sl-color-gray-2: hsl(var(--sl-hue-accent), 6%, 32%);
+	--sl-color-gray-3: hsl(var(--sl-hue-accent), 5%, 48%);
+	--sl-color-gray-4: hsl(var(--sl-hue-accent), 5%, 64%);
+	--sl-color-gray-5: hsl(var(--sl-hue-accent), 8%, 80%);
+	--sl-color-gray-6: hsl(var(--sl-hue-accent), 12%, 91%);
+	--sl-color-gray-7: hsl(var(--sl-hue-accent), 18%, 95%);
+	--sl-color-black: hsl(var(--sl-hue-accent), 35%, 96%);
 }
 
 /* --- Layout fixes --- */
