@@ -65,6 +65,21 @@
 	.content-panel .sl-container {
 		margin-inline: auto;
 	}
+
+	/* Starlight's own formula grows the right-hand TOC column to absorb all
+	   leftover wide-screen space (so on a 2560px viewport it measured ~300px
+	   left sidebar vs ~784px right TOC column) — content ends up centered
+	   between two very unequal-width sidebars, which visibly skews it left
+	   of the actual viewport center. Pin the TOC column to the same fixed
+	   width as the left sidebar instead, so the two flanking columns are
+	   equal and the main content area (and the centered text column inside
+	   it) is centered in the real viewport, not just in the leftover gap. */
+	.right-sidebar-container {
+		width: var(--sl-sidebar-width);
+	}
+	[data-has-sidebar][data-has-toc] .main-pane {
+		width: calc(100% - var(--sl-sidebar-width));
+	}
 }
 
 @media (min-width: 100rem) {
