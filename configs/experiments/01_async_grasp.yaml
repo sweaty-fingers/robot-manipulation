@@ -1,0 +1,12 @@
+name: async_grasp
+env:
+  backend: drake_grasp
+  control_dt: 0.02
+  max_episode_steps: 150
+  params:
+    object_radius: 0.03
+    table_friction: 0.4
+    finger_friction: 0.8
+    finger_start: 0.10
+data_dir: data/episodes/async_grasp
+checkpoint_dir: runs/async_grasp

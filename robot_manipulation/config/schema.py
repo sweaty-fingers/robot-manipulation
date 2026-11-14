@@ -21,6 +21,8 @@ class EnvConfig:
     success_radius: float = 0.05
     max_force: float = 5.0
     max_episode_steps: int = 200
+    # Backend-specific kwargs for envs that don't use the reach-task fields above.
+    params: dict = field(default_factory=dict)
 
 
 @dataclass
