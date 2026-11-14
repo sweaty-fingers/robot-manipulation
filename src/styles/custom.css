@@ -245,3 +245,20 @@ a.card:hover {
 header.header {
 	padding: 0;
 }
+
+/* --- Desktop sidebar: no background panel ---
+   The sidebar is inset by --sl-edge-offset on very wide screens (to stay
+   grouped with the content), which left an unpainted strip between the
+   viewport edge and a sidebar that has its own background — it read as a
+   gap. The right-hand TOC has no background; do the same here so both
+   flanks look alike. Mobile keeps the background since the sidebar is an
+   overlay menu there. */
+@media (min-width: 50rem) {
+	.sidebar-pane {
+		background-color: transparent;
+		/* Its right border was painted in the page-background color (it only
+		   mattered as an edge of the old panel). Use the hairline color like
+		   the TOC's left border so the two flanks stay symmetric. */
+		border-inline-end-color: var(--sl-color-hairline);
+	}
+}
