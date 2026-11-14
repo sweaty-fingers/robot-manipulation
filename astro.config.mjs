@@ -33,6 +33,8 @@ export default defineConfig({
 					items: [
 						{ label: 'Manipulation 기초', slug: 'concepts/manipulation-basics' },
 						{ label: '지각과 제어', slug: 'concepts/perception-and-control' },
+						{ label: '촉각 없이 접촉을 다루는 법', slug: 'concepts/touchless-grasping' },
+						{ label: '용어집', slug: 'concepts/glossary' },
 					],
 				},
 				{
@@ -55,6 +57,16 @@ export default defineConfig({
 					items: [
 						{ label: 'rerun.io 개요', slug: 'data-pipeline/rerun-overview' },
 						{ label: '재학습 루프', slug: 'data-pipeline/retraining-loop' },
+					],
+				},
+				{
+					label: '자료 (References)',
+					items: [
+						{ label: '사용법', slug: 'references' },
+						{ label: '연구 지형', slug: 'references/landscape' },
+						{ label: '논문 목록', slug: 'references/papers' },
+						{ label: '하드웨어 & 제품', slug: 'references/hardware' },
+						{ label: '시뮬레이션 도구', slug: 'references/simulation-tools' },
 					],
 				},
 				{
