@@ -98,11 +98,22 @@
 	   width as the left sidebar instead, so the two flanking columns are
 	   equal and the main content area (and the centered text column inside
 	   it) is centered in the real viewport, not just in the leftover gap. */
+	/* The TOC placeholder sits in the same flex row as .main-pane. .main-frame's
+	   padding-inline (below) already reserves the TOC column, so the
+	   placeholder must take no space itself — otherwise the page body is
+	   squeezed by an extra TOC-width and hugs the left. The TOC panel is
+	   position: fixed, so it doesn't need the placeholder's width. */
 	.right-sidebar-container {
-		width: var(--sl-sidebar-width);
+		width: 0;
+		flex: none;
 	}
+	/* .main-frame's padding-inline (below) already reserves the sidebar and
+	   TOC columns, so .main-pane must fill the remaining content box. Also
+	   subtracting the sidebar width here (an earlier version) counted the TOC
+	   column twice: the page body came out ~300px narrower than its slot and
+	   hugged the left side. */
 	[data-has-sidebar][data-has-toc] .main-pane {
-		width: calc(100% - var(--sl-sidebar-width));
+		width: 100%;
 	}
 
 	/* The above keeps content centered WITHIN the space between the two
