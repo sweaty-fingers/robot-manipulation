@@ -65,6 +65,7 @@ export default defineConfig({
 						{ label: '사용법', slug: 'references' },
 						{ label: '연구 지형', slug: 'references/landscape' },
 						{ label: '논문 목록', slug: 'references/papers' },
+						{ label: '교재 · 강의', slug: 'references/courses' },
 						{ label: '하드웨어 & 제품', slug: 'references/hardware' },
 						{ label: '시뮬레이션 도구', slug: 'references/simulation-tools' },
 					],
