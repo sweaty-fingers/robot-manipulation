@@ -204,3 +204,23 @@ a.card:hover {
 	transform: translateY(-1px);
 	box-shadow: var(--sl-shadow-md);
 }
+
+/* LinkCard (used on the homepage): the whole card is already one <a> via a
+   stretched-link ::before, so hovering anywhere on it should react — give
+   it the same accent treatment as .card instead of Starlight's default
+   plain-gray hover. */
+.sl-link-card {
+	transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.sl-link-card:hover {
+	border-color: var(--sl-color-accent);
+	background: color-mix(in srgb, var(--sl-color-accent) 6%, transparent);
+	transform: translateY(-1px);
+	box-shadow: var(--sl-shadow-md);
+}
+
+.sl-link-card:hover .title,
+.sl-link-card:hover .icon {
+	color: var(--sl-color-accent);
+}
