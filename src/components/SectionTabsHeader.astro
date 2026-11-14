@@ -59,24 +59,20 @@ const { pathname } = Astro.url;
 
 	.section-tabs ul {
 		margin: 0;
-		padding: 0 var(--sl-nav-pad-x);
 		display: flex;
 		gap: 0.25rem;
 		list-style: none;
 	}
 
-	/* Match the sidebar/content/TOC group's max-width treatment (see
-	   custom.css's --sl-edge-offset): inset the header's content and the
-	   tab row by the same amount so they stay grouped with the content
-	   below instead of spreading to the raw viewport edges. The bars'
-	   own backgrounds stay full-bleed — only the content inside insets. */
-	@media (min-width: 72rem) {
-		.original-header-row {
-			padding-inline: var(--sl-edge-offset, 0px);
-		}
-		.section-tabs ul {
-			padding-inline: calc(var(--sl-edge-offset, 0px) + var(--sl-nav-pad-x));
-		}
+	/* Inset by --sl-edge-offset (see custom.css) so the bars' content stays
+	   grouped with the page content on very wide screens; backgrounds stay
+	   full-bleed. The tab list is pulled in by the chip padding so the first
+	   tab's TEXT lines up with the site title above it. */
+	.original-header-row {
+		padding-inline: calc(var(--sl-edge-offset, 0px) + var(--sl-nav-pad-x));
+	}
+	.section-tabs ul {
+		padding-inline: calc(var(--sl-edge-offset, 0px) + var(--sl-nav-pad-x) - 0.75rem);
 	}
 
 	.section-tabs a {

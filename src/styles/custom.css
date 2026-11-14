@@ -224,3 +224,13 @@ a.card:hover {
 .sl-link-card:hover .icon {
 	color: var(--sl-color-accent);
 }
+
+/* --- Header: no inner padding, so the tab row can't overflow the box ---
+   Starlight's <header> pads 0.75rem/1.5rem inside a box sized by
+   --sl-nav-height. With our extra tab row that padding made the content
+   (64 + 40 + 24px) taller than the box, so the tab row's background hung 12px
+   below the header and started 24px in from each edge — a visible step at
+   both ends. Zero the padding; the rows own their horizontal inset. */
+header.header {
+	padding: 0;
+}

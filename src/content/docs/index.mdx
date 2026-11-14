@@ -14,7 +14,8 @@ hero:
       variant: minimal
 ---
 
-import { CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+import { CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import SectionCard from '../../components/SectionCard.astro';
 
 ## 시작하기
 
@@ -35,24 +36,8 @@ import { CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components
 </Tabs>
 
 <CardGrid>
-	<LinkCard
-		title="개념"
-		description="Robot manipulation의 핵심 개념 — 좌표계, 역기구학, 파지(grasping), 지각-제어 루프."
-		href="concepts/manipulation-basics/"
-	/>
-	<LinkCard
-		title="시뮬레이션"
-		description="Drake / MuJoCo 기반 시뮬레이터 환경 구축, sim-to-real 검증 전략."
-		href="simulation/drake-mujoco-overview/"
-	/>
-	<LinkCard
-		title="모델 학습 & 검증"
-		description="실제 제어를 위한 모델 학습 파이프라인과 검증 지표."
-		href="training/model-training/"
-	/>
-	<LinkCard
-		title="데이터 파이프라인"
-		description="rerun.io 기반 로그 수집 → 재학습 루프 설계."
-		href="data-pipeline/rerun-overview/"
-	/>
+	<SectionCard title="개념" description="Robot manipulation의 핵심 개념 — 좌표계, 역기구학, 파지(grasping), 지각-제어 루프." href="concepts/manipulation-basics/" icon="open-book" hue="#d97757" />
+	<SectionCard title="시뮬레이션" description="Drake / MuJoCo 기반 시뮬레이터 환경 구축, sim-to-real 검증 전략." href="simulation/drake-mujoco-overview/" icon="rocket" hue="#d9a441" />
+	<SectionCard title="모델 학습 & 검증" description="실제 제어를 위한 모델 학습 파이프라인과 검증 지표." href="training/model-training/" icon="setting" hue="#7fa58a" />
+	<SectionCard title="데이터 파이프라인" description="rerun.io 기반 로그 수집 → 재학습 루프 설계." href="data-pipeline/rerun-overview/" icon="random" hue="#6f9bc4" />
 </CardGrid>
