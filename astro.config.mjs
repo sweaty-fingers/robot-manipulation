@@ -34,6 +34,7 @@ export default defineConfig({
 						{ label: 'Manipulation 기초', slug: 'concepts/manipulation-basics' },
 						{ label: '지각과 제어', slug: 'concepts/perception-and-control' },
 						{ label: '촉각 없이 접촉을 다루는 법', slug: 'concepts/touchless-grasping' },
+						{ label: 'FSM과 Behavior Tree', slug: 'concepts/fsm-and-behavior-tree' },
 						{ label: '용어집', slug: 'concepts/glossary' },
 					],
 				},
