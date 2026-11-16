@@ -22,6 +22,8 @@ jobs:
       - uses: withastro/action@v3
         with:
           node-version: 22
+          # rehype-mermaid renders diagrams at build time and needs a headless Chromium.
+          build-cmd: npx playwright install --with-deps chromium && npm run build
   deploy:
     needs: build
     runs-on: ubuntu-latest

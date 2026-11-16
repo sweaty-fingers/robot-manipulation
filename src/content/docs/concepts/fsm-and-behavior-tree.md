@@ -28,16 +28,22 @@ description: 로봇 작업 순서를 짜는 두 방식, 유한 상태 기계(FSM
 
 ### 파지 작업 예시 (→ 해석: Phase B 환경에 대응)
 
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> APPROACH
+    APPROACH --> SYNC_CLOSE: 위치 추정 유효
+    APPROACH --> SEARCH: 물체 미검출
+    SEARCH --> APPROACH: 물체 검출
+    SYNC_CLOSE --> SQUEEZE: 첫 접촉 추정
+    SYNC_CLOSE --> RETRY: 타임아웃
+    RETRY --> APPROACH: 손가락 열고 재접근
+    SQUEEZE --> HOLD: 3손가락 접촉
+    HOLD --> SQUEEZE: 슬립 감지
+    HOLD --> [*]
 ```
- ┌────────┐ 도착 예상시각 계산됨 ┌───────────┐ 첫 접촉 감지 ┌─────────┐
- │ APPROACH├────────────────────▶│ SYNC_CLOSE ├────────────▶│ SQUEEZE │
- └───┬────┘                     └─────┬─────┘             └────┬────┘
-     │ 물체 미검출                    │ 타임아웃               │ 3손가락 모두 접촉
-     ▼                               ▼                        ▼
- ┌────────┐                      ┌─────────┐              ┌────────┐
- │ SEARCH │                      │  RETRY  │              │  HOLD  │
- └────────┘                      └─────────┘              └────────┘
-```
+
+*파지 FSM — APPROACH → SYNC_CLOSE → SQUEEZE → HOLD가 정상 경로, SEARCH·RETRY는 실패·복구 경로*
 
 | 상태 | 실행하는 것 | 다음 상태로 가는 조건 |
 |---|---|---|

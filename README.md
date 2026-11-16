@@ -8,10 +8,13 @@ Robot manipulation 개념, Drake/MuJoCo 시뮬레이션, 실제 제어 모델 �
 
 ```bash
 npm install
+npx playwright install chromium   # 최초 1회 — Mermaid 다이어그램을 빌드 시 SVG로 렌더링하는 데 필요
 npm run dev
 ```
 
 `http://localhost:4321`에서 확인.
+
+문서에서 다이어그램은 ` ```mermaid ` 코드블록으로 작성하면 됩니다(빌드 시 정적 SVG로 변환, 색은 `custom.css`에서 테마에 맞춤).
 
 ## 콘텐츠 구조
 

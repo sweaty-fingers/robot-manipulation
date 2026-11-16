@@ -1,12 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import rehypeMermaid from 'rehype-mermaid';
+import { unified } from '@astrojs/markdown-remark';
 
 // GitHub Pages serves this repo at https://sweaty-fingers.github.io/robot-manipulation/
 // Update `site`/`base` here if the GitHub user or repo name changes.
 export default defineConfig({
 	site: 'https://sweaty-fingers.github.io',
 	base: '/robot-manipulation',
+	markdown: {
+		// Render ```mermaid fences to static SVG at build time (needs Playwright chromium).
+		processor: unified({
+			syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid'] },
+			rehypePlugins: [[rehypeMermaid, { strategy: 'inline-svg' }]],
+		}),
+	},
 	integrations: [
 		starlight({
 			title: 'Robot Manipulation Lab',
