@@ -317,3 +317,39 @@ svg[id^="mermaid"] .nodeLabel *,
 svg[id^="mermaid"] text {
   color: var(--sl-color-white) !important;
 }
+
+/* ---------- Hessian / grasp figures (inline SVG from scripts/antipodal_hessian.py) ---------- */
+.hf-fig {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.75rem;
+  background: var(--sl-color-bg-nav);
+  overflow-x: auto;
+}
+.hf-fig figcaption {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
+}
+svg.hf { display: block; width: 100%; min-width: 520px; height: auto; margin-inline: auto; font-family: inherit; }
+svg.hf .hf-box { fill: none; stroke: var(--sl-color-hairline); stroke-width: 1.2; }
+svg.hf .hf-contour { fill: none; stroke: var(--sl-color-gray-4); stroke-width: 1.3; }
+svg.hf .hf-axis { stroke: var(--sl-color-gray-3); stroke-width: 1.3; stroke-dasharray: 4 3; }
+svg.hf .hf-head, svg.hf .hf-head2 { fill: var(--sl-color-gray-3); }
+svg.hf .hf-headp { fill: var(--sl-color-green); }
+svg.hf .hf-headn { fill: var(--sl-color-red); }
+svg.hf .hf-shape { fill: color-mix(in srgb, var(--sl-color-accent) 14%, var(--sl-color-bg-nav)); stroke: var(--sl-color-gray-3); stroke-width: 1.6; stroke-linejoin: round; }
+svg.hf .hf-chord { stroke: var(--sl-color-gray-2); stroke-width: 1.6; stroke-dasharray: 5 3; }
+svg.hf .hf-pt { stroke: var(--sl-color-bg-nav); stroke-width: 1.5; }
+svg.hf .k-min { fill: var(--sl-color-green); }
+svg.hf .k-max { fill: var(--sl-color-red); }
+svg.hf .k-saddle { fill: var(--sl-color-orange); }
+svg.hf text { fill: var(--sl-color-gray-2); font-size: 13px; }
+svg.hf .hf-h { fill: var(--sl-color-white); font-size: 15px; font-weight: 600; }
+svg.hf .hf-t { fill: var(--sl-color-gray-3); font-size: 13px; }
+svg.hf .hf-move { stroke-width: 2.4; fill: none; }
+svg.hf .hf-move.pos { stroke: var(--sl-color-green); }
+svg.hf .hf-move.neg, svg.hf .hf-move.neg2 { stroke: var(--sl-color-red); }
+svg.hf .hf-move.neg2 { stroke-dasharray: 5 3; }

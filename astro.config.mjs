@@ -46,6 +46,7 @@ export default defineConfig({
 						{ label: 'FSM과 Behavior Tree', slug: 'concepts/fsm-and-behavior-tree' },
 						{ label: '점군 (Point Cloud)', slug: 'concepts/point-cloud' },
 						{ label: '자세 추정 (Pose Estimation)', slug: 'concepts/pose-estimation' },
+						{ label: '대척 파지와 Hessian', slug: 'concepts/antipodal-hessian' },
 						{ label: '용어집', slug: 'concepts/glossary' },
 					],
 				},
