@@ -3,7 +3,7 @@
 This repo has two parts in one git repo, deliberately kept decoupled:
 
 1. Docs (`docs/`) written with **docs-kit** (`.docs-kit/`, git submodule of
-   https://github.com/sweaty-fingers/docs-kit, branch `astro` = Astro site engine): personal notes on robot
+   https://github.com/sweaty-fingers/docs-kit, branch `main` = Astro site engine): personal notes on robot
    manipulation — concepts, Drake simulation, model training & validation, a rerun.io-based retraining data pipeline,
    and a reference collection for the research goal (non-perturbing grasp, LEAP Hand target).
 2. `robot_manipulation/` — the actual Python framework: pretrained perception encoders feeding a trainable
