@@ -19,17 +19,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true          # .docs-kit (docs-kit, public)
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
-      - run: npm ci
-      # rehype-mermaid renders diagrams at build time and needs a headless Chromium.
-      - run: npx playwright install --with-deps chromium
-      - run: npm run build
+          cache-dependency-path: .docs-kit/site/package-lock.json
+      # docs-kit builds the site from docs/ and docs-kit.yml; host runner = Node on the runner (no Docker image needed).
+      # --strict: any docs-kit WARNING (broken link, page not in the menu, ...) fails the deploy.
+      - run: .docs-kit/bin/docs.sh build --strict
+        env:
+          DOCS_RUNNER: host
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: build/site
   deploy:
     needs: build
     runs-on: ubuntu-latest

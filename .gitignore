@@ -1,7 +1,5 @@
-# build output
-dist/
-# generated types
-.astro/
+# docs site build (docs-kit: build/site, build/.kit)
+build/
 
 # dependencies
 node_modules/
