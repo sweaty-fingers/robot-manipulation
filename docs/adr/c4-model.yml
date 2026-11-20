@@ -1,0 +1,100 @@
+# C4 model of robot-manipulation: elements, relations, and the views drawn from them in the architecture viewer
+# (adr/viewer/). ADRs point at elements with `c4: [<id>, ...]`. How to edit: adr/guide.md §9.
+# Source of truth for the structure: robot_manipulation/ (factory.py builds every swappable piece) and scripts/.
+
+elements:
+  - id: researcher
+    name: 연구자 (yoon)
+    kind: person
+    description: 실험을 돌리고 문서를 씀
+  - id: framework
+    name: robot-manipulation
+    kind: system
+    description: 무교란 파지 연구용 Python 프레임워크와 학습 노트
+  - id: scripts
+    name: 실행 스크립트
+    kind: container
+    parent: framework
+    technology: Python (scripts/)
+    description: collect_demos, train, evaluate, 실험 스크립트(reproduce_async_push, explore_arrival_sync)
+  - id: envs
+    name: 시뮬레이션 환경
+    kind: container
+    parent: framework
+    technology: RobotEnv (robot_manipulation/envs/)
+    description: DrakeEnv(point-mass reach), ThreeFingerGraspEnv(Phase B 3손가락 파지). factory.py로 교체
+  - id: encoders
+    name: 관측 인코더
+    kind: container
+    parent: framework
+    technology: PyTorch (robot_manipulation/encoders/)
+    description: ProprioEncoder, ObservationEncoder(fusion)
+  - id: action_expert
+    name: action expert
+    kind: container
+    parent: framework
+    technology: PyTorch (robot_manipulation/action_experts/)
+    description: MLPActionExpert. 인코더 출력에서 행동을 냄
+  - id: policy
+    name: 정책
+    kind: container
+    parent: framework
+    technology: robot_manipulation/policies/
+    description: Policy = 관측 인코더 + action expert
+  - id: training
+    name: 학습·평가
+    kind: container
+    parent: framework
+    technology: robot_manipulation/training/
+    description: Trainer(데이터셋으로 정책 학습), Evaluator(환경에서 정책 평가)
+  - id: data
+    name: 데이터 파이프라인
+    kind: container
+    parent: framework
+    technology: robot_manipulation/data/
+    description: 학습 데이터 .npz(dataset_builder), 시각화 로그 .rrd(RerunLogger, 시각화 전용)
+  - id: docs
+    name: 문서 사이트
+    kind: container
+    parent: framework
+    technology: docs-kit (.docs-kit/)
+    description: docs/ → GitHub Pages
+  - id: drake
+    name: Drake
+    kind: system
+    external: true
+    description: 물리 시뮬레이터 (MultibodyPlant, point contact)
+  - id: mujoco
+    name: MuJoCo (계획)
+    kind: system
+    external: true
+    description: 두 번째 시뮬레이션 백엔드 후보. 아직 구현하지 않음
+  - id: rerun
+    name: Rerun 뷰어
+    kind: system
+    external: true
+    description: .rrd 기록 재생 (로컬 뷰어, app.rerun.io)
+
+relations:
+  # from the imports of scripts/ and robot_manipulation/ (2026-11-20)
+  - {from: researcher, to: scripts, label: 실행}
+  - {from: researcher, to: docs, label: 기록}
+  - {from: scripts, to: envs, label: 데모 rollout (factory.build_env)}
+  - {from: scripts, to: data, label: 데모 저장·데이터셋 읽기}
+  - {from: scripts, to: training, label: 학습·평가 실행}
+  - {from: training, to: policy, label: 학습·실행}
+  - {from: training, to: envs, label: 평가 rollout}
+  - {from: policy, to: encoders, label: 관측 인코딩}
+  - {from: policy, to: action_expert, label: 행동 예측}
+  - {from: envs, to: drake, label: 물리 시뮬레이션, kind: alt}
+  - {from: envs, to: mujoco, label: 물리 시뮬레이션 (계획), kind: alt}
+  - {from: data, to: rerun, label: 시각화 로그 (.rrd)}
+
+views:
+  - id: context
+    title: 시스템 컨텍스트
+    description: 연구자, 프레임워크, 외부 도구
+  - id: framework
+    title: 컨테이너
+    description: robot_manipulation 패키지와 스크립트의 구성
+    scope: framework

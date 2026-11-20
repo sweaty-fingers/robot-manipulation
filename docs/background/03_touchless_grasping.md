@@ -36,7 +36,7 @@ description: 촉각 센서 없이 비전과 proprioception만으로 비동기 �
 비동기 접촉이 문제인 이유는 손가락마다 **도착 시각이 다르기** 때문입니다.
 도착 시각은 (남은 거리) ÷ (속도)라서, 남은 거리를 접촉 *전에* 알 수 있으면 손가락별 속도를 조절해 **동시에 닿게** 만들 수 있습니다. 촉각이 필요한 반응 루프 자체가 사라집니다.
 
-이 레포의 Phase B 환경에서 확인했습니다(`scripts/explore_arrival_sync.py`).
+이 레포의 Phase B 환경에서 확인했습니다(`scripts/explore_arrival_sync.py`, 실험 기록 [EXP-0002](../experiments/0002-arrival-sync.md), 밀림 재현은 [EXP-0001](../experiments/0001-async-contact-push.md)).
 물체가 가정한 중심에서 `offset`만큼 어긋나 있을 때의 **물체 변위(mm)**:
 
 | 물체 어긋남 | 접근 속도(m/s) | 눈 감고 (모두 같은 속도) | 기하 정보 사용 (동시 도착) | 기하 + 비전 오차 2mm |

@@ -3,9 +3,9 @@
 #   바꾸기: .docs-kit/bin/kit.py enable <id> | disable <id> | profile <묶음>   (켤 때 시작 파일을 복사)
 profile: minimal                 # minimal | app | dev | research | all
 features:                        # 묶음에서 바꿀 탭만
-  adr: false                     # ADR 탭 모듈은 docs-kit Astro 판 M4에서 만들어짐. 첫 ADR을 쓸 때 켬
   background: true               # 개념·도구 설명 (배경 NN)
   reference: true                # 자료 모음 (참고 R<N>)
+  experiments: true
 areas:                           # ADR·VR·EXP 머리말 area 값 (id: 이름)
   sim: 시뮬레이션
   control: 제어·파지
