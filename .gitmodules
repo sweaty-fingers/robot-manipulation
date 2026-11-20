@@ -1,4 +1,4 @@
 [submodule ".docs-kit"]
 	path = .docs-kit
 	url = https://github.com/sweaty-fingers/docs-kit.git
-	branch = astro
+	branch = main

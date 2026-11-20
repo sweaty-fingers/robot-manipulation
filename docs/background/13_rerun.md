@@ -50,7 +50,13 @@ rerun logs/episode_001.rrd
 
 ## 웹 임베드 (선택)
 
-`.rrd` 파일을 어딘가에 호스팅해두면 문서 페이지에 뷰어를 iframe으로 임베드할 수 있습니다.
+`.rrd` 파일을 `docs/rrd/`에 두면 사이트(GitHub Pages)에 함께 올라가고, 문서 페이지에 한 줄로 뷰어 상자를 넣을 수 있습니다. 이 사이트는 `docs-kit.yml`의 `rerun.viewer: hosted`라 Rerun 호스팅 뷰어(app.rerun.io)가 사이트의 파일을 엽니다. 누르기 전에는 아무것도 받지 않습니다.
+
+```markdown
+<!-- rerun: rrd/episode_001.rrd height=480 -->
+```
+
+다른 곳에 호스팅한 파일은 주소를 그대로 써도 되고(`<!-- rerun: https://.../episode_001.rrd -->`), 직접 iframe으로 넣을 수도 있습니다.
 
 ```html
 <iframe

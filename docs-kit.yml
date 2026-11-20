@@ -19,7 +19,12 @@ site:
   issues_url: https://github.com/sweaty-fingers/robot-manipulation/issues/
   base: /robot-manipulation/     # GitHub Pages 프로젝트 사이트 경로
   url: https://sweaty-fingers.github.io
+  repo_url: https://github.com/sweaty-fingers/robot-manipulation
+  edit_url: https://github.com/sweaty-fingers/robot-manipulation/edit/main/docs/
   extra_css: [_static/site.css]  # 그림(인라인 SVG) 스타일
+
+rerun:                           # Rerun 기록 상자: GitHub Pages라 로컬 뷰어 대신 호스팅 뷰어가 사이트의 .rrd를 엶
+  viewer: hosted
 
 links:                           # 짧은 주소 /r/<name>/
   - {name: home, to: README.md, title: 첫 페이지}
