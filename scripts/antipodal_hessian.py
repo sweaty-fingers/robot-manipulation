@@ -1,6 +1,6 @@
 """Antipodal points as critical points of E = 1/2 * kappa * ||p(t1) - p(t2)||^2.
 
-Numerical companion to docs `concepts/antipodal-hessian`. Pure numpy/scipy (no Drake).
+Numerical companion to docs `docs/background/08_antipodal_hessian.md`. Pure numpy/scipy (no Drake).
 Shape model follows MIT Robotic Manipulation, Analytic Antipodal Grasps exercise
 (hypercycloidal gear); the ellipse/circle cases are closed-form sanity checks.
 
