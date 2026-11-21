@@ -54,7 +54,7 @@ architecture is "current phase"), update the corresponding doc page in the same 
 | 지식 | 배경 (개념, 시뮬레이터·학습·데이터 파이프라인 설명) | `docs/background/NN_*.md`, 제목 `# NN.` | 가끔 갱신 |
 | 지식 | 용어집 | `docs/glossary/README.md` | 새 용어마다 한 줄 |
 | 발행물 | 주간 보고 | `docs/weekly/YYYY-MM-DD.md`, 제목 `# YYYY-MM-DD 주간 보고` | 회의 전 `draft`, 회의 뒤 `published` + `commit` |
-| 재료 | 메모 (사용자가 메뉴 "메모"의 앱에서 씀) | `private/memos/<번호>.md` — git 밖(공개 저장소라서), 이 PC에만 | 사용자가 씀. 근거가 아님 |
+| 재료 | 메모 (사용자가 메뉴 "메모"의 앱에서 씀, 배포 사이트에서 PC·휴대폰) | 비공개 저장소 `sweaty-fingers/robot-manipulation-memos`, 이 PC의 복제본 `private/memos/<번호>.md`(이 저장소의 git 밖) | 사용자가 씀. 근거가 아님 |
 
 - 탭 폴더에 두면 메뉴에 저절로 들어갑니다. 탭 폴더 밖 문서는 경고가 납니다.
 - 번호는 재사용하지 않습니다(G<N>, R<N>, 배경 NN). 링크될 제목에 ` / `, ` → `, ` - `를 쓰지 않습니다.
@@ -79,7 +79,7 @@ architecture is "current phase"), update the corresponding doc page in the same 
 
 ### D5. 메모와 주간 보고
 
-- **메모**는 사용자가 쓰는 재료입니다. 사용자가 고른 메모만 읽습니다(`.docs-kit/bin/memos.py show <번호…>`, 찾기 `memos.py list --work … --tag … --since …`). 메모 파일은 시킬 때만 고치거나 지웁니다. 메모의 사실을 문서에 쓸 때는 정본(코드, VR·EXP·ADR, 배경 문서)에서 확인하고 인용합니다. 메모는 git 밖(`private/memos/`)이라 커밋하지 않고, `docs_search`에도 나오지 않습니다.
+- **메모**는 사용자가 쓰는 재료입니다. 사용자가 고른 메모만 읽습니다(`.docs-kit/bin/memos.py show <번호…>`, 찾기 `memos.py list --work … --tag … --since …`). 메모 파일은 시킬 때만 고치거나 지웁니다. 메모의 사실을 문서에 쓸 때는 정본(코드, VR·EXP·ADR, 배경 문서)에서 확인하고 인용합니다. 메모는 비공개 저장소에 있고 `private/memos/`는 그 복제본입니다. `memos.py`가 읽기 전에 저절로 `git pull`하며(`memos.py sync`로 따로도), 에이전트는 그 복제본에 커밋하지 않습니다. 메모는 `docs_search`에 나오지 않습니다. 복제본이 없으면: `git clone git@github.com:sweaty-fingers/robot-manipulation-memos.git private/memos`.
 - **주간 보고**를 써 달라고 하면 먼저 **어느 메모를 참고할지 묻습니다**(`memos.py list`로 최근 메모를 업무별로 보여 주고 번호·업무·태그·기간으로 고르게 함. 메모 앱의 "에이전트에게 넘기기"로 붙여 넣은 목록이 있으면 그것을 씀).
   - 고른 메모가 있으면: `.docs-kit/bin/weekly_draft.py --memos <고른 것> --write` → 재료 `build/weekly/<날짜>_material.md`와 뼈대. **그 메모에 적힌 일만** 템플릿(업무별 배경 · 한 일 · 결과 · 다음)으로 옮깁니다. 메모 날짜가 그 주 밖이어도 되고, 그 주의 커밋·이슈를 더하지 않습니다. 머리말 `memos`는 뼈대가 채웁니다.
   - 메모를 고르지 않거나 "알아서 써 줘"면: `.docs-kit/bin/weekly_draft.py --write`(지난 보고 이후의 커밋·이슈·작업 내역)로 그 주 작업을 파악해 씁니다. 첫 보고는 `--since <시작일>`.
