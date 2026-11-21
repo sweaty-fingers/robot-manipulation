@@ -6,6 +6,8 @@ features:                        # 묶음에서 바꿀 탭만
   background: true               # 개념·도구 설명 (배경 NN)
   reference: true                # 자료 모음 (참고 R<N>)
   experiments: true
+  memos: true
+  weekly: true
 areas:                           # ADR·VR·EXP 머리말 area 값 (id: 이름)
   sim: 시뮬레이션
   control: 제어·파지
@@ -22,6 +24,9 @@ site:
   repo_url: https://github.com/sweaty-fingers/robot-manipulation
   edit_url: https://github.com/sweaty-fingers/robot-manipulation/edit/main/docs/
   extra_css: [_static/site.css]  # 그림(인라인 SVG) 스타일
+
+memos:                           # 업무 메모(메뉴 "메모"): 공개 저장소라 git 밖 폴더에 둠 (.gitignore의 private/)
+  dir: private/memos
 
 rerun:                           # Rerun 기록 상자: GitHub Pages라 로컬 뷰어 대신 호스팅 뷰어가 사이트의 .rrd를 엶
   viewer: hosted

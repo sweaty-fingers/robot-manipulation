@@ -29,3 +29,6 @@ __pycache__/
 data/rrd/*.rrd
 data/episodes/
 runs/
+
+# work memos (docs-kit memos tab, docs-kit.yml memos.dir): kept on this computer, never committed
+private/
