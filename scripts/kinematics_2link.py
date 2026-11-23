@@ -180,15 +180,101 @@ def svg_manipulability() -> str:
     return "".join(out)
 
 
+# ---------------- rotation representation figures (gimbal lock, unit quaternion) ----------------
+def rpy_matrix(roll, pitch, yaw):
+    """R = Rz(yaw) @ Ry(pitch) @ Rx(roll) (the common ZYX roll-pitch-yaw convention)."""
+    cr, sr, cp, sp, cy, sy = np.cos(roll), np.sin(roll), np.cos(pitch), np.sin(pitch), np.cos(yaw), np.sin(yaw)
+    Rx = np.array([[1, 0, 0], [0, cr, -sr], [0, sr, cr]])
+    Ry = np.array([[cp, 0, sp], [0, 1, 0], [-sp, 0, cp]])
+    Rz = np.array([[cy, -sy, 0], [sy, cy, 0], [0, 0, 1]])
+    return Rz @ Ry @ Rx
+
+
+def gimbal_checks():
+    a = rpy_matrix(np.radians(30), np.pi / 2, np.radians(10))
+    b = rpy_matrix(np.radians(50), np.pi / 2, np.radians(30))   # roll+20, yaw+20: same roll - yaw
+    c = rpy_matrix(np.radians(30), np.pi / 2, np.radians(40))   # roll - yaw differs
+    d = rpy_matrix(np.radians(30), np.radians(60), np.radians(10))
+    e = rpy_matrix(np.radians(50), np.radians(60), np.radians(30))
+    print("gimbal lock check (pitch=90): same roll-yaw -> same R:", np.allclose(a, b), "| different roll-yaw -> different R:", not np.allclose(a, c))
+    print("pitch=60: same roll-yaw but different R:", not np.allclose(d, e))
+
+
+def _arrow(x0, y0, x1, y1, cls, head=9):
+    ang = np.arctan2(y1 - y0, x1 - x0)
+    l = (x1 - head * np.cos(ang - 0.4), y1 - head * np.sin(ang - 0.4))
+    r = (x1 - head * np.cos(ang + 0.4), y1 - head * np.sin(ang + 0.4))
+    return (f'<line x1="{x0:.1f}" y1="{y0:.1f}" x2="{x1:.1f}" y2="{y1:.1f}" class="{cls}"/>'
+            f'<polygon points="{x1:.1f},{y1:.1f} {l[0]:.1f},{l[1]:.1f} {r[0]:.1f},{r[1]:.1f}" class="{cls} hf-tip"/>')
+
+
+def svg_gimbal() -> str:
+    """Side view: the yaw axis (fixed, vertical) and the roll axis (the body x axis after pitch)."""
+    cases = [(0, "pitch = 0°", "두 축이 수직: roll과 yaw는 다른 회전"),
+             (60, "pitch = 60°", "두 축이 가까워짐"),
+             (90, "pitch = 90°", "두 축이 겹침: roll과 yaw가 같은 회전")]
+    pw, L = 230, 90
+    out = ['<svg class="hf" viewBox="0 0 690 290" role="img" aria-label="pitch에 따라 roll 축과 yaw 축이 겹치는 모습">']
+    for i, (pd, name, note) in enumerate(cases):
+        cx, cy = i * pw + 100, 150
+        p = np.radians(pd)
+        out.append(_arrow(cx, cy, cx, cy - L, "hf-ax-yaw"))
+        ex, ey = cx + L * np.cos(p), cy - L * np.sin(p)
+        out.append(_arrow(cx, cy, ex, ey, "hf-ax-roll"))
+        out.append(f'<circle cx="{cx}" cy="{cy}" r="4" class="hf-joint"/>')
+        if pd:
+            out.append(_arc(cx, cy, 34, np.pi / 2, p))
+        lx = cx - 8 if pd == 0 else cx - 10
+        out.append(f'<text x="{cx-10}" y="{cy-L-8}" text-anchor="end" class="hf-key yw">yaw 축</text>')
+        out.append(f'<text x="{ex+(12 if pd == 90 else 8):.0f}" y="{ey+(4):.0f}" class="hf-key rl">roll 축</text>')
+        out.append(f'<text x="{i*pw+pw/2:.0f}" y="236" text-anchor="middle" class="hf-h">{name}</text>')
+        out.append(f'<text x="{i*pw+pw/2:.0f}" y="258" text-anchor="middle" class="hf-t">{note}</text>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+def svg_quat() -> str:
+    """Unit quaternion as a point on a circle (the 2D slice of the 4D unit sphere): q and -q are one rotation."""
+    cx, cy, r = 150, 150, 95
+    th = np.radians(100)
+    h = th / 2
+    qx, qy = cx + r * np.cos(h), cy - r * np.sin(h)
+    nx, ny = cx - r * np.cos(h), cy + r * np.sin(h)
+    out = ['<svg class="hf" viewBox="0 0 690 300" role="img" aria-label="단위 쿼터니언과 이중 덮개">']
+    out.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" class="hf-ws"/>')
+    out.append(f'<line x1="{cx-r-20}" y1="{cy}" x2="{cx+r+20}" y2="{cy}" class="hf-axis"/>')
+    out.append(f'<line x1="{cx}" y1="{cy-r-20}" x2="{cx}" y2="{cy+r+20}" class="hf-axis"/>')
+    out.append(f'<text x="{cx+r+22}" y="{cy+4}" class="hf-t">w</text>')
+    out.append(f'<text x="{cx+6}" y="{cy-r-24}" class="hf-t">n·sin(θ/2)</text>')
+    out.append(f'<line x1="{cx}" y1="{cy}" x2="{qx:.1f}" y2="{qy:.1f}" class="hf-move pos"/>')
+    out.append(f'<line x1="{cx}" y1="{cy}" x2="{nx:.1f}" y2="{ny:.1f}" class="hf-move neg2"/>')
+    out.append(_arc(cx, cy, 30, 0, h))
+    out.append(f'<text x="{cx+34}" y="{cy-6}" class="hf-t">θ/2</text>')
+    out.append(f'<circle cx="{qx:.1f}" cy="{qy:.1f}" r="6" class="hf-pt k-min"/>')
+    out.append(f'<circle cx="{nx:.1f}" cy="{ny:.1f}" r="6" class="hf-pt k-max"/>')
+    out.append(f'<text x="{qx+10:.0f}" y="{qy-6:.0f}" class="hf-h">q</text>')
+    out.append(f'<text x="{nx-12:.0f}" y="{ny+18:.0f}" text-anchor="end" class="hf-h">−q</text>')
+    out.append('<text x="150" y="288" text-anchor="middle" class="hf-t">단위 쿼터니언 = 원 위의 한 점 (실제는 4차원 구)</text>')
+    rows = [("hf-h", "q = (cos θ/2, n·sin θ/2)"), ("hf-t", "n: 회전 축(단위 벡터), θ: 회전 각"), ("hf-t", ""),
+            ("hf-key pq", "■ q: θ만큼 회전"), ("hf-key nq", "■ −q: 반대편 점이지만 같은 회전"), ("hf-t", ""),
+            ("hf-t", "θ가 0°→360°로 돌면 q는 반 바퀴만 감"), ("hf-t", "θ = 360°는 q = −(1,0,0,0), 같은 자세"), ("hf-t", "θ를 720° 돌아야 q가 제자리로 옴"), ("hf-t", ""),
+            ("hf-t", "원 위에서는 어디로 가도 끊기거나 겹치는 점이 없음"), ("hf-t", "→ 짐벌락 같은 특이점이 없음")]
+    for i, (cls, line) in enumerate(rows):
+        out.append(f'<text x="330" y="{52+i*21}" class="{cls}">{line}</text>')
+    out.append("</svg>")
+    return "".join(out)
+
+
 if __name__ == "__main__":
     import pathlib
     import sys
 
     if "--figs" not in sys.argv:
         run_checks()
+        gimbal_checks()
     else:
         outdir = pathlib.Path(sys.argv[sys.argv.index("--figs") + 1])
         outdir.mkdir(parents=True, exist_ok=True)
-        for name, fn in [("fk", svg_fk), ("ik", svg_ik), ("manip", svg_manipulability)]:
+        for name, fn in [("fk", svg_fk), ("ik", svg_ik), ("manip", svg_manipulability), ("gimbal", svg_gimbal), ("quat", svg_quat)]:
             (outdir / f"{name}.svg.html").write_text(fn())
             print("wrote", outdir / f"{name}.svg.html")

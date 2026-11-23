@@ -44,3 +44,10 @@ svg.hf .hf-ell { fill: color-mix(in srgb, var(--kit-accent) 22%, transparent); s
 svg.hf .k-ee { fill: var(--kit-c-tip); }
 svg.hf .hf-key.a { fill: var(--kit-accent); font-size: 13px; }
 svg.hf .hf-key.b { fill: var(--kit-c-warn); font-size: 13px; }
+
+/* rotation figures (gimbal lock): the two axes drawn as arrows */
+svg.hf .hf-ax-yaw { stroke: var(--kit-c-tip); fill: var(--kit-c-tip); stroke-width: 3; }
+svg.hf .hf-ax-roll { stroke: var(--kit-c-danger); fill: var(--kit-c-danger); stroke-width: 3; stroke-dasharray: none; }
+svg.hf polygon.hf-tip { stroke-width: 1; }
+svg.hf .hf-key.yw, svg.hf .hf-key.pq { fill: var(--kit-c-tip); font-size: 13px; }
+svg.hf .hf-key.rl, svg.hf .hf-key.nq { fill: var(--kit-c-danger); font-size: 13px; }
