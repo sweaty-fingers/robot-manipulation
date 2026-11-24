@@ -314,5 +314,6 @@ flowchart LR
 
 ## 참고
 - MIT Robotic Manipulation, 3장 [Basic Pick and Place — Kinematics](https://manipulation.csail.mit.edu/pick.html#kinematics), 6장 [Motion Planning (trajectories.html)](https://manipulation.csail.mit.edu/trajectories.html) · [교재·강의 페이지](../reference/r3_courses.md#manipulation)
-- 위 노트가 언급하지만 이 문서에서 다루지 않은 것: 키프레임 궤적 보간(`PiecewisePose` 등), B-spline 기반 기구학 궤적 최적화, RRT/PRM, GCS, 시간 최적 경로 매개변수화(TOPP). 모션 플래닝으로 이어지는 주제이며 이후 문서로 분리할 수 있습니다.
+- B-스플라인 궤적과 증강 라그랑지안은 [B-스플라인과 증강 라그랑지안](15_bspline_and_augmented_lagrangian.md)에서 다룹니다.
+- 위 노트가 언급하지만 이 문서에서 다루지 않은 것: 키프레임 궤적 보간(`PiecewisePose` 등), RRT/PRM, GCS, 시간 최적 경로 매개변수화(TOPP). 모션 플래닝으로 이어지는 주제이며 이후 문서로 분리할 수 있습니다.
 - 수치 검증과 그림 생성: `scripts/kinematics_2link.py` (`--figs DIR`로 SVG 재생성).
